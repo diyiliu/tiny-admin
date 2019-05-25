@@ -6,11 +6,12 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.util.StringUtils;
 
 /**
- * Description: UserRealm
+ * Description: AuthRealm
  * Author: DIYILIU
  * Update: 2019-05-23 10:41
  */
-public class UserRealm extends AuthenticatingRealm {
+public class AuthRealm extends AuthenticatingRealm {
+
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
@@ -27,7 +28,7 @@ public class UserRealm extends AuthenticatingRealm {
 
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 "admin",
-                "9b7818badb85defb83950253316ffbbe",
+                "dd2ff6824accbefd23edc18c234ad313",
                 ByteSource.Util.bytes("6a75262bcb161d22eae1638f4a75bd14"),
                 getName());
 

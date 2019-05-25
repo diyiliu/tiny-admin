@@ -1,6 +1,6 @@
 package com.diyiliu.sys.controller;
 
-import com.diyiliu.support.util.RespUtil;
+import com.diyiliu.support.util.ResponseUtil;
 import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -26,30 +26,29 @@ public class HomeController {
 
     @GetMapping
     public Object index(){
+        Subject subject = SecurityUtils.getSubject();
 
-        return RespUtil.ok("Hello, Vue.js!");
+        return ResponseUtil.ok(subject.getSession().getId());
     }
 
     @PostMapping("/login")
     public Object login(HttpServletRequest request, String username, String password){
         String failure = (String) request.getAttribute("shiroLoginFailure");
-
         Subject subject = SecurityUtils.getSubject();
 
-        System.out.println(subject.isAuthenticated());
-
-        return RespUtil.ok(subject.getSession().getId());
+        System.out.println(subject.isAuthenticated() + ":" + failure);
+        return ResponseUtil.unLogin();
     }
 
     @GetMapping("/login")
     public Object toLogin(){
 
-        return RespUtil.unLogin();
+        return ResponseUtil.unLogin();
     }
 
     @GetMapping("/home")
     public Object home(){
 
-        return RespUtil.ok("欢迎");
+        return ResponseUtil.ok("欢迎");
     }
 }

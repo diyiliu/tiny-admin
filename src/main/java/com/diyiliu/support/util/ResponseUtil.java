@@ -3,7 +3,7 @@ package com.diyiliu.support.util;
 import lombok.Data;
 
 /**
- * Description: RespUtil
+ * Description: ResponseUtil
  * Author: DIYILIU
  * Update: 2019-05-23 09:40
  * <p>
@@ -22,7 +22,7 @@ import lombok.Data;
  * 505，更新数据失败，即后端数据库更新失败（正常情况应该更新成功）。
  */
 
-public class RespUtil {
+public class ResponseUtil {
 
     public static MsgBody ok() {
 
@@ -92,11 +92,6 @@ public class RespUtil {
         private String msg;
 
         private T data;
-
-        public MsgBody putStatus(int status) {
-            this.status = status;
-            return this;
-        }
 
         public MsgBody putMsg(String msg) {
             this.msg = msg;

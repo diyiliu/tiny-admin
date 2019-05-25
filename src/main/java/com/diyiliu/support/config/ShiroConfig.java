@@ -1,8 +1,8 @@
 package com.diyiliu.support.config;
 
+import com.diyiliu.support.shiro.AuthRealm;
+import com.diyiliu.support.shiro.CustomerSessionManager;
 import com.diyiliu.support.shiro.FormLoginFilter;
-import com.diyiliu.support.shiro.UserRealm;
-import com.diyiliu.support.shiro.UserSessionManager;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -29,7 +29,7 @@ public class ShiroConfig {
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
         factoryBean.setSecurityManager(securityManager());
         factoryBean.setLoginUrl("/console/login");
-        factoryBean.setSuccessUrl("/console/home");
+        factoryBean.setSuccessUrl("/console");
 
         Map<String, Filter> filters = new LinkedHashMap<>();
         filters.put("authc", formLoginFilter());
@@ -57,21 +57,21 @@ public class ShiroConfig {
     }
 
     @Bean
-    public UserRealm userRealm() {
+    public AuthRealm userRealm() {
         HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
         credentialsMatcher.setHashAlgorithmName("MD5");
         credentialsMatcher.setHashIterations(2);
 
-        UserRealm userRealm = new UserRealm();
-        userRealm.setCredentialsMatcher(credentialsMatcher);
+        AuthRealm authRealm = new AuthRealm();
+        authRealm.setCredentialsMatcher(credentialsMatcher);
 
-        return userRealm;
+        return authRealm;
     }
 
     @Bean
     public SessionManager sessionManager() {
 
-        return new UserSessionManager();
+        return new CustomerSessionManager();
     }
 
     @Bean

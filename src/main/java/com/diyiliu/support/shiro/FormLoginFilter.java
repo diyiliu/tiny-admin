@@ -28,7 +28,6 @@ public class FormLoginFilter extends FormAuthenticationFilter {
         try {
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
-
             return onLoginSuccess(token, subject, request, response);
         } catch (AuthenticationException e) {
             return onLoginFailure(token, e, request, response);
